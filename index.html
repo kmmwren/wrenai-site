@@ -1,442 +1,226 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WrenAI | AI Coaching, Team Enablement, and Consulting</title>
-  <meta name="description" content="WrenAI sells 1:1 AI coaching, team enablement, and consulting to help people and teams become AI-native.">
-  <style>
-    :root {
-      --bg: #fbfaf7;
-      --surface: #ffffff;
-      --text: #191816;
-      --muted: #5f5b53;
-      --line: #dfd8cc;
-      --accent: #2f6f5e;
-      --accent-dark: #214f43;
-      --accent-soft: #e8f1ed;
-      --focus: #8f4f1f;
-      --shadow: 0 18px 50px rgba(25, 24, 22, 0.08);
-      --radius: 8px;
-      --max: 1120px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WrenAI — AI coaching, team enablement &amp; consulting</title>
+<meta name="description" content="WrenAI helps people and teams become AI-native — 1:1 AI coaching, team enablement, and consulting that move you from AI-as-autocomplete to AI as a genuine thinking partner.">
+<meta name="theme-color" content="#f5f3ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,340..600,0..70,0..1;1,9..144,340..560,0..70,0..1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ee;            /* warm off-white (from the ChatGPT base, warmed) */
+    --surface:#fffdf8;
+    --ink:#181b19;
+    --muted:#5b635d;
+    --line:#e2ddd1;
+    --green:#2f6f5e;         /* ChatGPT accent, kept */
+    --green-deep:#204c41;
+    --green-soft:#e7f1ec;
+    --clay:#c4683a;          /* a single warm spark, used sparingly */
+    --radius:14px;
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+    font-size:clamp(1.02rem,.6rem + .75vw,1.16rem);line-height:1.6;font-weight:420;letter-spacing:-.002em;
+    background:
+      radial-gradient(120% 80% at 88% -8%, rgba(47,111,94,.16), transparent 46%),
+      radial-gradient(90% 60% at -5% 8%, rgba(196,104,58,.08), transparent 50%),
+      linear-gradient(180deg,#f7f5f0 0%, #f2efe6 100%);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  body::before{ /* faint grain for a printed-paper feel */
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;width:min(100% - 2.2rem,var(--maxw));margin-inline:auto}
+  a{color:inherit}
+  ::selection{background:var(--green);color:#fff}
+  :focus-visible{outline:2.5px solid var(--clay);outline-offset:4px;border-radius:4px}
 
-    * {
-      box-sizing: border-box;
-    }
+  /* header */
+  header{padding:1.5rem 0}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .mark{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+  .mark svg{width:30px;height:30px;flex:0 0 auto;color:var(--green)}
+  .word{font-family:"Fraunces",serif;font-weight:600;font-size:1.4rem;letter-spacing:-.012em;font-variation-settings:"WONK" 1}
+  .word .ai{font-style:italic;color:var(--green)}
+  .top-mail{font-size:.92rem;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:.2s}
+  .top-mail:hover{color:var(--green);border-color:var(--green)}
 
-    html {
-      scroll-behavior: smooth;
-    }
+  /* hero */
+  .hero{padding:clamp(3.2rem,7vw,6.4rem) 0 clamp(2.4rem,5vw,4rem)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(17rem,.8fr);gap:clamp(1.8rem,5vw,4.4rem);align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 1.2rem;
+    font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-deep);font-weight:600}
+  .eyebrow::before{content:"";width:.62rem;height:.62rem;border-radius:50%;background:var(--green);box-shadow:0 0 0 .32rem var(--green-soft)}
+  h1{font-family:"Fraunces",serif;font-weight:360;font-size:clamp(3rem,2rem + 6.6vw,6.6rem);line-height:.95;
+    letter-spacing:-.025em;margin:0;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1}
+  .tagline{font-family:"Fraunces",serif;font-style:italic;font-weight:380;color:var(--green-deep);
+    font-size:clamp(1.5rem,1rem + 2vw,2.5rem);line-height:1.05;letter-spacing:-.01em;margin:1.1rem 0 0;max-width:15ch;
+    font-variation-settings:"opsz" 80,"WONK" 1}
+  .hero-copy{font-size:clamp(1.12rem,.9rem + .7vw,1.34rem);color:var(--ink);max-width:38rem;margin:1.7rem 0 0;font-weight:430}
+  .cta-row{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center}
+  .btn{font-family:"Fraunces",serif;font-size:1.08rem;text-decoration:none;color:#fff;background:var(--green-deep);
+    padding:.8rem 1.4rem;border-radius:999px;display:inline-flex;align-items:center;gap:.55rem;
+    transition:background .2s,transform .2s}
+  .btn:hover{background:var(--green);transform:translateY(-2px)}
+  .btn .arr{transition:transform .22s}.btn:hover .arr{transform:translateX(4px)}
+  .cta-note{font-size:.92rem;color:var(--muted)}
 
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(47, 111, 94, 0.13), transparent 34rem),
-        linear-gradient(180deg, #fbfaf7 0%, #f6f2eb 100%);
-      line-height: 1.55;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:0 22px 50px -28px rgba(32,76,65,.4);padding:clamp(1.3rem,3vw,1.9rem);position:relative;overflow:hidden}
+  .panel::after{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--green),var(--clay))}
+  .panel .plabel{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700;margin:0 0 .6rem}
+  .panel p{margin:0;color:var(--muted);font-size:1.02rem}
+  .panel p b{color:var(--ink);font-family:"Fraunces",serif;font-weight:540;font-size:1.1rem;display:block;margin-bottom:.35rem}
 
-    a {
-      color: inherit;
-      text-decoration-thickness: 0.08em;
-      text-underline-offset: 0.18em;
-    }
+  /* sections */
+  section.block{padding:clamp(2.8rem,5vw,4.4rem) 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:.8rem;margin:0 0 1.9rem;font-size:.8rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);font-weight:600}
+  .sec-head .n{font-family:"Fraunces",serif;font-style:italic;color:var(--green);font-size:1rem;letter-spacing:0}
 
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 4px;
-      border-radius: 4px;
-    }
+  .services{display:grid;gap:1rem}
+  .svc{display:grid;grid-template-columns:3.4rem minmax(0,1fr);gap:clamp(.8rem,2.5vw,1.8rem);
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.6rem;
+    transition:transform .2s,box-shadow .2s,border-color .2s}
+  .svc:hover{transform:translateY(-3px);box-shadow:0 18px 40px -26px rgba(32,76,65,.45);border-color:#cfdfd7}
+  .svc .num{font-family:"Fraunces",serif;font-style:italic;font-size:1.7rem;color:var(--green);line-height:1}
+  .svc h3{font-family:"Fraunces",serif;font-weight:480;font-size:clamp(1.35rem,1rem + 1.2vw,1.85rem);
+    letter-spacing:-.012em;margin:0 0 .45rem;line-height:1.1;font-variation-settings:"opsz" 60}
+  .svc p{margin:0;color:var(--muted);max-width:56ch;font-size:1.02rem}
 
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  .who blockquote{margin:0;font-family:"Fraunces",serif;font-weight:350;
+    font-size:clamp(1.8rem,1.1rem + 3vw,3.4rem);line-height:1.13;letter-spacing:-.02em;max-width:20ch;
+    font-variation-settings:"opsz" 144,"WONK" 0}
+  .who blockquote .q{font-style:italic;color:var(--green)}
 
-    .shell {
-      width: min(100% - 2rem, var(--max));
-      margin: 0 auto;
-    }
+  .contact{background:var(--green-deep);color:#fff;border-radius:var(--radius);padding:clamp(1.8rem,4vw,2.8rem);
+    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.4rem 2rem;align-items:center;
+    background-image:radial-gradient(90% 120% at 100% 0,rgba(196,104,58,.28),transparent 55%)}
+  .contact h2{font-family:"Fraunces",serif;font-weight:380;font-size:clamp(1.7rem,1.2rem + 2.2vw,2.7rem);
+    letter-spacing:-.02em;margin:0;line-height:1.06}
+  .contact h2 em{font-style:italic;color:#f0c3a6}
+  .contact p{margin:.7rem 0 0;color:rgba(255,255,255,.84);max-width:40ch}
+  .mailbtn{font-family:"Fraunces",serif;font-size:1.12rem;text-decoration:none;color:var(--green-deep);
+    background:#fff;padding:.85rem 1.5rem;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:.55rem;
+    transition:transform .2s,background .2s}
+  .mailbtn:hover{transform:translateY(-2px);background:#fef7f1}
 
-    header {
-      padding: 1.25rem 0;
-    }
+  footer{border-top:1px solid var(--line);padding:1.7rem 0 2.4rem;margin-top:.3rem}
+  .foot{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;justify-content:space-between;font-size:.84rem;color:var(--muted)}
+  .foot .fmark{display:flex;align-items:center;gap:.5rem;font-family:"Fraunces",serif;font-weight:560}
+  .foot .fmark svg{width:19px;height:19px;color:var(--green)}
 
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
+  .rise{opacity:0;transform:translateY(14px);animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.04s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
 
-    .brand {
-      font-weight: 760;
-      font-size: 1.05rem;
-      letter-spacing: 0;
-    }
-
-    .nav-link {
-      color: var(--muted);
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-
-    .nav-link:hover {
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 0.2em;
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .hero {
-      padding: clamp(4.5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(18rem, 0.82fr);
-      gap: clamp(2rem, 6vw, 5rem);
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 0 0 1.15rem;
-      color: var(--accent-dark);
-      font-weight: 700;
-      font-size: 0.92rem;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 0.7rem;
-      height: 0.7rem;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 0.32rem var(--accent-soft);
-    }
-
-    h1 {
-      max-width: 12ch;
-      margin: 0;
-      font-size: clamp(4rem, 12vw, 8.5rem);
-      line-height: 0.9;
-      letter-spacing: 0;
-    }
-
-    .tagline {
-      max-width: 15ch;
-      margin: 1.15rem 0 0;
-      font-size: clamp(1.55rem, 4vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-      font-weight: 720;
-      color: var(--accent-dark);
-    }
-
-    .hero-copy {
-      max-width: 40rem;
-      margin: 1.75rem 0 0;
-      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-      color: var(--muted);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-top: 2rem;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 3rem;
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--accent-dark);
-      border-radius: var(--radius);
-      background: var(--accent-dark);
-      color: #ffffff;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .panel {
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: clamp(1.25rem, 3vw, 2rem);
-    }
-
-    .panel p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .panel strong {
-      display: block;
-      margin-bottom: 0.45rem;
-      color: var(--text);
-      font-size: 1.05rem;
-    }
-
-    section {
-      padding: clamp(3rem, 7vw, 5.5rem) 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(12rem, 0.35fr) minmax(0, 0.65fr);
-      gap: clamp(1.5rem, 5vw, 4rem);
-      align-items: start;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 3.2vw, 2.55rem);
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    .services {
-      display: grid;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .service {
-      padding: 1.3rem 0 1.3rem 1.25rem;
-      border-left: 3px solid var(--accent);
-    }
-
-    .service p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
-
-    .service strong {
-      color: var(--text);
-      font-weight: 760;
-    }
-
-    .audience {
-      max-width: 44rem;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.12rem, 2vw, 1.5rem);
-      line-height: 1.35;
-    }
-
-    .contact-band {
-      padding: clamp(3rem, 7vw, 5rem) 0;
-      background: var(--accent-dark);
-      color: #ffffff;
-    }
-
-    .contact-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .contact-inner h2 {
-      color: #ffffff;
-    }
-
-    .contact-inner p {
-      max-width: 38rem;
-      margin: 0.75rem 0 0;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 1.05rem;
-    }
-
-    .email-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 3.15rem;
-      padding: 0.8rem 1rem;
-      border-radius: var(--radius);
-      background: #ffffff;
-      color: var(--accent-dark);
-      font-weight: 760;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .email-link:hover {
-      text-decoration: underline;
-      text-underline-offset: 0.2em;
-    }
-
-    footer {
-      padding: 1.5rem 0;
-      background: #151412;
-      color: rgba(255, 255, 255, 0.74);
-      font-size: 0.9rem;
-    }
-
-    footer p {
-      margin: 0;
-    }
-
-    @media (max-width: 780px) {
-      .hero-grid,
-      .section-grid,
-      .contact-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 3.25rem;
-      }
-
-      h1 {
-        max-width: none;
-      }
-
-      .tagline {
-        max-width: 18ch;
-      }
-
-      .panel {
-        margin-top: 0.5rem;
-      }
-
-      .contact-inner {
-        gap: 1.25rem;
-      }
-
-      .email-link {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .shell {
-        width: min(100% - 1.25rem, var(--max));
-      }
-
-      nav {
-        align-items: flex-start;
-      }
-
-      .nav-link {
-        font-size: 0.9rem;
-      }
-
-      .service {
-        padding-left: 1rem;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-  </style>
+  @media (max-width:780px){
+    .hero-grid{grid-template-columns:1fr}
+    .contact{grid-template-columns:1fr}
+    .mailbtn{justify-self:start}
+    .svc{grid-template-columns:2.4rem minmax(0,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none}*{transition:none!important}}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="shell">
-        <nav aria-label="Primary navigation">
-          <a class="brand" href="#top" aria-label="WrenAI home">WrenAI</a>
-          <a class="nav-link" href="mailto:hello@wrenai.uk">hello@wrenai.uk</a>
-        </nav>
-      </div>
-    </header>
+<div class="wrap">
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="shell hero-grid">
-          <div>
-            <p class="eyebrow">Helping people and teams become AI-native</p>
-            <h1 id="hero-title">WrenAI</h1>
-            <p class="tagline">Helping people and teams become AI-native</p>
-            <p class="hero-copy">Most people use AI like a faster autocomplete. WrenAI helps you use it as a genuine thinking partner, and rebuild how you actually work around it.</p>
-            <div class="hero-actions">
-              <a class="button" href="mailto:hello@wrenai.uk">Contact WrenAI</a>
-            </div>
+  <header>
+    <div class="bar rise d1">
+      <a class="mark" href="#top" aria-label="WrenAI home">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 33c6 3 13 3 19-1 5-3 8-8 8-14 0-2 1-3 3-3"/><path d="M34 15c2 0 4 1 5 3"/><path d="M37 18l4-7"/><path d="M26 22c-3 2-7 2-10 1"/><circle cx="33.5" cy="16.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="word">Wren<span class="ai">AI</span></span>
+      </a>
+      <a class="top-mail" href="mailto:hello@wrenai.uk">hello@wrenai.uk</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow rise d2">AI coaching &amp; consultancy</p>
+          <h1 class="rise d2">WrenAI</h1>
+          <p class="tagline rise d3">Helping people and teams become AI-native</p>
+          <p class="hero-copy rise d3">Most people use AI like a faster autocomplete. WrenAI helps you use it as a genuine thinking partner, and rebuild how you actually work around it.</p>
+          <div class="cta-row rise d4">
+            <a class="btn" href="mailto:hello@wrenai.uk">Start a conversation <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <span class="cta-note">or email <a href="mailto:hello@wrenai.uk" style="color:inherit;text-decoration:underline;text-underline-offset:3px">hello@wrenai.uk</a></span>
           </div>
-
-          <aside class="panel" aria-label="Company summary">
-            <p><strong>AI coaching, team enablement, and consulting.</strong> Practical support for people and teams who want to use AI with better judgement, stronger workflows, and more leverage in real work.</p>
-          </aside>
         </div>
-      </section>
-
-      <section aria-labelledby="what-we-do">
-        <div class="shell section-grid">
-          <h2 id="what-we-do">What we do</h2>
-          <ul class="services">
-            <li class="service">
-              <p><strong>1:1 AI coaching</strong> — live, hands-on sessions working through your real work, not slides. We go well beyond "how to use ChatGPT" into the tools, harnesses, and workflows that change what's actually possible.</p>
-            </li>
-            <li class="service">
-              <p><strong>Team enablement</strong> — bringing a whole team or company up to AI-native, with the judgement to use it well.</p>
-            </li>
-            <li class="service">
-              <p><strong>Consulting &amp; builds</strong> — designing AI-native workflows and tools (including open source) for focus, prioritisation, and getting AI to do real work.</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section aria-labelledby="who-its-for">
-        <div class="shell section-grid">
-          <h2 id="who-its-for">Who it's for</h2>
-          <p class="audience">Founders, knowledge workers, and teams who are genuinely curious about AI and want to do far more with it.</p>
-        </div>
-      </section>
-
-      <section class="contact-band" aria-labelledby="contact">
-        <div class="shell contact-inner">
-          <div>
-            <h2 id="contact">Start a conversation</h2>
-            <p>For coaching, team enablement, or consulting, contact WrenAI by email.</p>
-          </div>
-          <a class="email-link" href="mailto:hello@wrenai.uk">hello@wrenai.uk</a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="shell">
-        <p>WRENAI LTD · Registered in England &amp; Wales, company no. 17221546 · 61 Bridge Street, Kington, HR5 3DJ.</p>
+        <aside class="panel rise d4" aria-label="What WrenAI offers">
+          <p class="plabel">In short</p>
+          <p><b>AI coaching, team enablement &amp; consulting.</b> Practical support for people and teams who want to use AI with better judgement, stronger workflows, and far more leverage in real work.</p>
+        </aside>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="block">
+      <p class="sec-head"><span class="n">i.</span> What we do</p>
+      <div class="services">
+        <article class="svc">
+          <div class="num">01</div>
+          <div>
+            <h3>1:1 AI coaching</h3>
+            <p>Live, hands-on sessions working through your real work, not slides. We go well beyond &ldquo;how to use ChatGPT&rdquo; into the tools, harnesses, and workflows that change what&rsquo;s actually possible.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="num">02</div>
+          <div>
+            <h3>Team enablement</h3>
+            <p>Bringing a whole team or company up to AI-native, with the judgement to use it well.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="num">03</div>
+          <div>
+            <h3>Consulting &amp; builds</h3>
+            <p>Designing AI-native workflows and tools (including open source) for focus, prioritisation, and getting AI to do real work.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block who">
+      <p class="sec-head"><span class="n">ii.</span> Who it&rsquo;s for</p>
+      <blockquote>Founders, knowledge workers, and teams who are <span class="q">genuinely curious</span> about AI and want to do far more with it.</blockquote>
+    </section>
+
+    <section class="block">
+      <div class="contact">
+        <div>
+          <h2>Let&rsquo;s make AI <em>actually</em> work for you.</h2>
+          <p>For coaching, team enablement, or consulting, start a conversation by email.</p>
+        </div>
+        <a class="mailbtn" href="mailto:hello@wrenai.uk">hello@wrenai.uk</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span class="fmark">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 33c6 3 13 3 19-1 5-3 8-8 8-14 0-2 1-3 3-3"/><path d="M34 15c2 0 4 1 5 3"/><path d="M37 18l4-7"/></svg>
+        WrenAI
+      </span>
+      <span>WRENAI LTD &middot; Registered in England &amp; Wales, company no. 17221546 &middot; 61 Bridge Street, Kington, HR5 3DJ.</span>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
